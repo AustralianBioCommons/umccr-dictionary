@@ -4,6 +4,8 @@ This repo contains Docker and Makefile based Data Dictionary Development workflo
 
 Our aim is to develop **UMCCR Data Dictionary** for Gen3 platform. 
 
+This is a forked repo with in-development data dictionaries for various Australian BioCommons in-progress projects.
+
 ## Development
 
 ### Design Notes
