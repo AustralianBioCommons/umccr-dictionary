@@ -4,11 +4,13 @@ has_children: false
 nav_order: 2
 ---
 
-# Introduction
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 # Schema structure
-
-
 
 ## Descriptors
 
