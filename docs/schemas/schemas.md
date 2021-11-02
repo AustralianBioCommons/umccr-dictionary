@@ -37,9 +37,9 @@ Links are what join the nodes of your data model together. The links go FROM the
 |--------------|---------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | name         | The name of the link from this schema to its parent, usually the parent's name in plural form                       |                                                                        |
 | backref      | The back reference from the parent back to the child, usually the name of the schema pluralised                     |                                                                        |
-| label        | A descriptor for the type of relationship. (Not sure if this is a controlled vocabulary or free text)               | describes, member_of, derived_from, data_from                          |
+| label        | A descriptor for the type of relationship. (Not sure if this is a controlled vocabulary or free text)               | `describes`, `member_of`, `derived_from`, data_from                          |
 | target_type  | the node id of the parent                                                                                           |                                                                        |
-| multiplicity | describes the numeric relationship from the child to the parent, these should be defined in the `_definitions.yaml` | one_to_one, one_to_many, many_to_many, to_one_project, to_many_project |
+| multiplicity | describes the numeric relationship from the child to the parent, these should be defined in the `_definitions.yaml` | `one_to_one`, `one_to_many`, `many_to_many`, `to_one_project`, to_many_project |
 | required     | Whether each instance of this schema needs to have this link                                                        | `true`, `false`                                                        |
 
 example links code from gdc dictionary `case.yaml`:
@@ -55,6 +55,13 @@ links:
 ```
 
 The above `links` snippet is specifying that a `case` is a `member_of` an `experiment`, i.e. the `experiment` is the parent of the `case`. The `multiplicity` indicates it is a `many_to_one` relationship, that is, many cases can be a part of a single experiment. The `required` property indicates this relationship is required, that is, every case that is submitted must be linked to a single experiment.
+
+### Multiple links
+
+Not sure if this is correct:
+{: .label .label-yellow }
+
+Do not fully understand the use of 'non-exclusive relationships' vs multiple links.
 
 If a child can link to multiple parents, that is, be a child of either `parentA` OR `parentB` , simply list an additional link, example from gdc dictionary `clinical_test.yaml`
 
