@@ -56,7 +56,7 @@ links:
     required: true
 ```
 
-The above `links` snippet is specifying that a `case` is a `member_of` an `experiment`, i.e. the `experiment` is the parent of the `case`. The `multiplicity` indicates it is a `many_to_one` relationship, that is, many cases can be a part of a single experiment. The `required` property indicates this relationship is required, that is, every case that is submitted must be linked to a single experiment.
+The above `links` snippet is specifying that a `case` is a `member_of` an `experiment`, that is, the `experiment` is the parent of the `case`. The `multiplicity` indicates it is a `many_to_one` relationship, that is, many cases can be a part of a single experiment. The `required` property indicates this relationship is required, that is, every case that is submitted must be linked to a single experiment.
 
 ### Multiple links
 
