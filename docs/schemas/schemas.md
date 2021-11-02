@@ -1,6 +1,6 @@
 ---
 title: Gen3 Schemas
-has_children: true
+has_children: false
 nav_order: 2
 ---
 
@@ -19,12 +19,12 @@ nav_order: 2
 | title                | Name for the schema                                                                              | string                                                                                               |
 | type                 | The type of the schema                                                                           | 'object'                                                                                             |
 | namespace            | the commons that uses this schema, usually a url                                                 | string                                                                                               |
-| category             | categories that represent broad roles for the node, these are customisable for different data models                                               | in UMCCR dictionary they are: administrative, index_file, biospecimen, clinical, notation, data_file |
+| category             | categories that represent broad roles for the node, these are customisable for different data models. Useful in querying as you can select all nodes of a particular category | in UMCCR dictionary they are: administrative, index_file, biospecimen, clinical, notation, data_file |
 | program              | ? guess is that it can configure which program this schema could be a part of with * meaning all | '*'                                                                                                  |
 | project              | ? guess is that it can configure which project this schema could be a part of with * meaning all | '*'                                                                                                  |
 | description          | A description for the schema                                                                     | string                                                                                               |
 | additionalProperties | Disallows a user from adding more properties than are specified in the schema when validating    | false                                                                                                |
-| submittable          | Whether this schema is directly submittable to the gen3 portal                                   | true/false                                                                                           |
+| submittable          | Whether this schema is directly submittable to the gen3 portal | true/false                                                                                           |
 | validators           | ?                                                                                                | ?                                                                                                    |
 | systemProperties     | these properties are those that will be automatically filled by the system unless otherwise defined by the user. These basic properties define the node itself but still need to be placed into the model. | as a minimum <br> - id <br> - project_id <br> - state <br> - created_datetime <br> - updated_datetime|
 
@@ -56,7 +56,7 @@ links:
 
 The above `links` snippet is specifying that a `case` is a `member_of` an `experiment`, i.e. the `experiment` is the parent of the `case`. The `multiplicity` indicates it is a `many_to_one` relationship, that is, many cases can be a part of a single experiment. The `required` property indicates this relationship is required, that is, every case that is submitted must be linked to a single experiment.
 
-If a child can link to multiple parents, simply list an additional link, example from gdc dictionary `clinical_test.yaml`
+If a child can link to multiple parents, that is, be a child of either `parentA` OR `parentB` , simply list an additional link, example from gdc dictionary `clinical_test.yaml`
 
 ```
 links:
@@ -74,7 +74,7 @@ links:
     required: false
 ```
 
-### Specifying non-exclusive links with a subgroup
+If a single node instance needs to link to multiple parents, that is, be a child of both `parentA` AND `parentB`, it is necessary to specify a non-exclusive relationship, setting `exclusive` property to false and listing the two links under a `subgroup` property. 
 
 Example from gdc dictionary `submitted_aligned_reads.yaml`
 
@@ -96,6 +96,7 @@ links:
       multiplicity: many_to_many
       required: false
 ```
+
 
 
 # References
