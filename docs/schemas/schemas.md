@@ -41,7 +41,7 @@ Links are what join the nodes of your data model together. The links go FROM the
 | backref      | The back reference from the parent back to the child, usually the name of the schema pluralised                     |                                                                        |
 | label        | A descriptor for the type of relationship. (Not sure if this is a controlled vocabulary or free text)               | `describes`, `member_of`, `derived_from`, data_from                          |
 | target_type  | the node id of the parent                                                                                           |                                                                        |
-| multiplicity | describes the numeric relationship from the child to the parent, these should be defined in the `_definitions.yaml` | `one_to_one`, `one_to_many`, `many_to_many`, `to_one_project`, to_many_project |
+| multiplicity | describes the numeric relationship from the child to the parent, these should be defined in the `_definitions.yaml` | `one_to_one`, `one_to_many`, `many_to_many`, `to_one_project`, `to_many_project` |
 | required     | Whether each instance of this schema needs to have this link                                                        | `true`, `false`                                                        |
 
 example links code from gdc dictionary `case.yaml`:
