@@ -5,7 +5,11 @@ parent: Schemas
 nav_order: 2
 ---
 
-## Links
+# Links
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 Links are what join the nodes of your data model together. The links go FROM the child TO the parent with the Program always being the ultimate root. Links are also described with a `backref`, `label` and `multiplicity` that should match up to one of the specified relationships in the `_definitions.yaml` file.
 
@@ -33,7 +37,7 @@ links:
 
 The above `links` snippet is specifying that a `case` is a `member_of` an `experiment`, that is, the `experiment` is the parent of the `case`. The `multiplicity` indicates it is a `many_to_one` relationship, that is, many cases can be a part of a single experiment. The `required` property indicates this relationship is required, that is, every case that is submitted must be linked to a single experiment.
 
-### Multiple links
+## Multiple links
 
 Not sure if this is correct:
 {: .label .label-yellow }
@@ -58,7 +62,7 @@ links:
     required: false
 ```
 
-### Link subgroups
+## Link subgroups
 
 If a single node instance needs to link to multiple parents, and the linking is related in some way, a link `subgroup` can be specified. 
 

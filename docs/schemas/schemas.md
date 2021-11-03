@@ -14,9 +14,9 @@ nav_order: 1
 
 TODO: Add a nice navigable diagram here
 
-## Required & Preferred Attributes
+## Required & Preferred Properties
 
-Any fields in the schema that are required are specified in a `required` block. Every schema should have the `submitter_id`, `type` and any parental links listed as required attributes. Any submission of a particular node type that does not contain values for the required nodes will not pass validation.
+Any properties in the schema that are required are specified in a `required` block. Every schema should have the `submitter_id`, `type` and any parental links listed as required attributes. Any submission of a particular node type that does not contain values for the required nodes will not pass validation.
 
 Example from `study.yaml`:
 
@@ -53,56 +53,6 @@ uniqueKeys:
   - [id]
   - [project_id, submitter_id]
 ```
-
-## Properties
-
-Properties define the rules about the different 'fields' of the node, i.e. what kind of metadata will be stored against each node.
-
-Each node should have:
- - property name
- - `description` - detailed description of the field
- - `type` - any of the existing [json schema](https://cswr.github.io/JsonSchema/spec/basic_types/) types
-
-### Shared Property Definitions
-
-In addition to the properties that you define as unique to a particular node, it is also useful to refer to properties that may be shared across many nodes. These properties can be saved within the `_definitions.yaml` and referred to as needed.
-
-Some examples from the gdc dictionary are:
-
-#### Ubiquitous properties 
-
-This `_definitions.yaml#/ubiquitous_properties` contains many of the required system properties such as `submitter_id` and `state`
-
-#### Link properties
-
-These are referred to by the property that describes the link and reflect the multiplicity of the link.
-
-### Property Types
-
-Most property types are straight forward. Some of the types are explained in further detail below.
-
-### Numeric properties
-
-Properties with a numeric type, that is `integer` or `number` can be restricted with minimum and maximum values.
-
-Example from `diagnosis.yaml`
-
-```
-age_at_diagnosis:
-    description: Age at the time of diagnosis expressed in number of days since birth.
-      If the age is greater than 32872 days (89 years), see 'age_at_diagnosis_gt89'.
-    type: integer
-    maximum: 32872
-    minimum: 0
-```
-
-### String properties
-
-#### Patterns
-
-#### Enumerations
-
-#### Term definitions, vocabulary and ontologies
 
 # References
 

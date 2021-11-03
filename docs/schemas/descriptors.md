@@ -5,7 +5,11 @@ parent: Schemas
 nav_order: 1
 ---
 
-## Descriptors
+# Descriptors
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 | Key                  | Description                                                                                      | allowed values                                                                                       |
 |----------------------|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
@@ -23,3 +27,19 @@ nav_order: 1
 | validators           | ?                                                                                                | ?                                                                                                    |
 | systemProperties     | these properties are those that will be automatically filled by the system unless otherwise defined by the user. These basic properties define the node itself but still need to be placed into the model. | as a minimum <br> - id <br> - project_id <br> - state <br> - created_datetime <br> - updated_datetime|
 
+## Unique Keys
+
+A set of `uniqueKeys` must be specified. This provides a way of uniquely identifying any node. 
+
+note:
+{: .label .label-yellow }
+
+Am yet to come accross an example other than the one below. Not sure about the exact function of this field.
+
+Example from `study.yaml`
+
+```
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+```
