@@ -83,7 +83,7 @@ properties:
         term_version: version of the source  # e.g. version and/or release date
     # OR
     term:
-      $ref: "_terms.yaml#/controlled_vocab"  # optional
+      $ref: "_terms.yaml#/controlled_vocab"  # optional definition in terms file
 
   restricted_text_property:
     description: Description of the property.

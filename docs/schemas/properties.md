@@ -77,8 +77,131 @@ age_at_diagnosis:
 
 ### String properties
 
+A general string property will allow any free text unless a pattern or enumeration is specified.
+
 #### Patterns
+
+Regex patterns can be used to restrict a string property to a certain format.
+
+Example from  `_definitions.yaml`:
+
+```
+UUID:
+    term:
+        $ref: "_terms.yaml#/UUID"
+    type: string
+    pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+```
 
 #### Enumerations
 
-#### Term definitions, vocabulary and ontologies
+Enumerations for a property restrict the values to a set of allowed values. If a value is specified outside of this set, the metadata will fail validation.
+
+Example from `family.yaml`:
+
+```
+consanguinity:
+    description: >-
+      Indicate if consanguinity is present or suspected within a family
+    enum:
+      - None suspected
+      - Present
+      - Suspected
+      - Unknown
+```
+
+#### Term definitions
+
+Properties can be linked to external definitions, such as ontologies or the NCIT by the use of term definitions. A single property may be defined by multiple term definitions, for example, one pointing to a NCIT reference, and one pointing to an Ontology reference.
+
+The format for specifying a term definition is:
+
+```
+property_name:
+  description: >
+    Descriptive text.
+  termDef:
+    term: Term name from source
+    source: name of source
+    cde_id: source id from CDE browser
+    cde_version: version of cde
+    term_url: "https://direct-link-to-term"
+```
+
+It is common practice to put the term definitions into a file called `_terms.yaml` and refer to them from a base schema.
+
+In the `_terms.yaml`, this would look like this:
+
+```
+bmi:
+  description: >
+    A calculated numerical quantity that represents an individual's weight to height ratio.
+  termDef:
+    term: Body Mass Index Value
+    source: caDSR
+    cde_id: 2006410
+    cde_version: 3.0
+    term_url: "https://cdebrowser.nci.nih.gov/cdebrowserClient/cdeBrowser.html#/search?publicId=2006410&version=3.0"
+```
+
+Whereas in the yaml that uses this term definition it would look something like this:
+
+```
+properties:
+  bmi:
+    term:
+      $ref: "_terms.yaml#/bmi"
+    type: number
+```
+
+
+#### Enum definitions
+
+As well as defining a term from an external ontology or vocabulary, you can also define each enumerated value.
+
+In the example below, we can see that property itself is defined in both the NCI Thesaurus as well as the Human Phenotype Ontology by using two `termDef` entries. 
+
+Each enum is also linked to an NCI Thesaurus entry using the `enumDef` syntax.
+
+```
+coronary_artery_disease:
+    description: >
+      Reported Coronary Artery disease in the participant (HARMONIZED)
+    enum:
+      - "Positive"
+      - "Negative"
+      - "Reported Unknown"
+      - "Not Reported"
+      - "Not Applicable"
+    termDef:
+       - term: coronary_artery_disease
+         source: NCI Thesaurus
+         term_id: C26732
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: coronary_artery_disease
+         source: hp
+         term_id: HP:0001677
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Positive
+         source: NCI Thesaurus
+         term_id: C38758
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Negative
+         source: NCI Thesaurus
+         term_id: C38757
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Reported Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Applicable
+         source: NCI Thesaurus
+         term_id: C48660
+         version_date: 19.03d (Release date:2019-03-25)
+```
