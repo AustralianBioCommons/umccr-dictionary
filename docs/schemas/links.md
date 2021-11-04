@@ -39,12 +39,7 @@ The above `links` snippet is specifying that a `case` is a `member_of` an `exper
 
 ## Multiple links
 
-Not sure if this is correct:
-{: .label .label-yellow }
-
-Do not fully understand the use of 'non-exclusive relationships' vs multiple links.
-
-If a child can link to multiple parents, that is, be a child of either `parentA` OR `parentB` , simply list an additional link, example from gdc dictionary `clinical_test.yaml`
+If a child can link to multiple parents, that is, be a child of either `parentA` OR `parentB` , simply list an additional link, example from gdc dictionary `clinical_test.yaml`. Bear in mind that there has to be at least one link that has `required: true` to ensure that nodes are always connected to the rest of the graph.
 
 ```yaml
 links:
