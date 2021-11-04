@@ -6,7 +6,7 @@ search_enabled: true
 search:
   # Split pages into sections that can be searched individually
   # Supports 1 - 6, default: 2
-  heading_level: 2
+  heading_level: 4
   # Maximum amount of previews per search result
   # Default: 3
   previews: 3
@@ -29,11 +29,11 @@ search:
 
 # Aux links for the upper right navigation
 aux_links:
-  "Just the Docs on GitHub":
-    - "//github.com/pmarsceill/just-the-docs"
+  "This Doc Repo on GitHub":
+    - "https://github.com/AustralianBioCommons/umccr-dictionary"
 
 # Makes Aux links open in a new tab. Default is false
-aux_links_new_tab: false
+aux_links_new_tab: true
 
 # Footer content
 # appears at the bottom of every page's main content
@@ -50,4 +50,4 @@ gh_edit_link_text: "Edit this page on GitHub."
 gh_edit_repository: "https://github.com/AustralianBioCommons/umccr-dictionary/docs" # the github URL for your repo
 gh_edit_branch: "main" # the branch that your docs is served from
 # gh_edit_source: docs # the source that your files originate from
-gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
+gh_edit_view_mode: "edit" # "tree" or "edit" if you want the user to jump into the editor immediately
