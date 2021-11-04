@@ -54,7 +54,39 @@ This `_definitions.yaml#/ubiquitous_properties` contains many of the required sy
 
 ### Link properties
 
-These are referred to by the property that describes the link and reflect the multiplicity of the link.
+In each schema, there needs to be a property that stores the link to its parent(s). 
+
+These are referred to by the property that describes the link and reflect the multiplicity of the link. The default link properties that are included in the `_definitions.yaml` are:
+
+- `to_one`
+- `to_many`
+- `to_one_project`
+- `to_many_project`
+
+These refer to the foreign key properties
+- `foreign_key_project`
+- `foreign_key`
+
+As an example from the `case.yaml`, the `links` section of the file looks like:
+
+```
+links:
+  - name: experiments 
+    backref: cases
+    label: member_of
+    target_type: experiment
+    multiplicity: many_to_one
+    required: true
+```
+
+which means in the `properties` section, you need to refer to this link by including a property like:
+
+```yaml
+properties:
+...
+  experiments: 
+    $ref: "_definitions.yaml#/to_one"
+```
 
 ## Property Types
 
@@ -159,7 +191,7 @@ properties:
 
 As well as defining a term from an external ontology or vocabulary, you can also define each enumerated value.
 
-In the example below, we can see that property itself is defined in both the NCI Thesaurus as well as the Human Phenotype Ontology by using two `termDef` entries. 
+In the example below from the `medical_history.yaml`, we can see that property itself is defined in both the NCI Thesaurus as well as the Human Phenotype Ontology by using two `termDef` entries. 
 
 Each enum is also linked to an NCI Thesaurus entry using the `enumDef` syntax.
 
