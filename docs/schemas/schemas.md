@@ -4,7 +4,7 @@ has_children: true
 nav_order: 1
 ---
 
-# Schema structure
+# Gen3 Schemas
 
 Schemas in Gen3 are written and edited in individual `yaml` files per schema before being compiled into a single json file that is used as the data dictionary for a given gen3 instance.
 
@@ -17,9 +17,9 @@ The aim of this part of the documentation is to help explain the overal structur
 
 Navigate to any of the above sections to learn more!
 
-An ['explainer' yaml file](https://github.com/AustralianBioCommons/umccr-dictionary/blob/main/docs/schemas/explainer_schema.yaml) with explantory comments is also available in the github repo for these docs.
+An ['explainer' yaml file](https://github.com/AustralianBioCommons/umccr-dictionary/blob/main/docs/schemas/explainer_schema.yaml) with explanatory comments is also available in the github repo for these docs.
 
-# References
+## References
 
 Materials in this documentation was drawn from the resources below as well as from the Slack Gen3 community on CDIS slack.
 
