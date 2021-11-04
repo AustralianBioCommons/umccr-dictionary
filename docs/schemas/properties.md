@@ -36,7 +36,7 @@ A block of `preferred` attributes may also be specified. This would indicate an 
 
 Example from `demographic.yaml`
 
-```
+```yaml
 preferred:
   - year_of_death
 ```
@@ -69,7 +69,7 @@ These refer to the foreign key properties
 
 As an example from the `case.yaml`, the `links` section of the file looks like:
 
-```
+```yaml
 links:
   - name: experiments 
     backref: cases
@@ -98,7 +98,7 @@ Properties with a numeric type, that is `integer` or `number` can be restricted 
 
 Example from `diagnosis.yaml`
 
-```
+```yaml
 age_at_diagnosis:
     description: Age at the time of diagnosis expressed in number of days since birth.
       If the age is greater than 32872 days (89 years), see 'age_at_diagnosis_gt89'.
@@ -117,7 +117,7 @@ Regex patterns can be used to restrict a string property to a certain format.
 
 Example from  `_definitions.yaml`:
 
-```
+```yaml
 UUID:
     term:
         $ref: "_terms.yaml#/UUID"
@@ -131,7 +131,7 @@ Enumerations for a property restrict the values to a set of allowed values. If a
 
 Example from `family.yaml`:
 
-```
+```yaml
 consanguinity:
     description: >-
       Indicate if consanguinity is present or suspected within a family
@@ -148,7 +148,7 @@ Properties can be linked to external definitions, such as ontologies or the NCIT
 
 The format for specifying a term definition is:
 
-```
+```yaml
 property_name:
   description: >
     Descriptive text.
@@ -164,7 +164,7 @@ It is common practice to put the term definitions into a file called `_terms.yam
 
 In the `_terms.yaml`, this would look like this:
 
-```
+```yaml
 bmi:
   description: >
     A calculated numerical quantity that represents an individual's weight to height ratio.
@@ -178,7 +178,7 @@ bmi:
 
 Whereas in the yaml that uses this term definition it would look something like this:
 
-```
+```yaml
 properties:
   bmi:
     term:
@@ -195,7 +195,7 @@ In the example below from the `medical_history.yaml`, we can see that property i
 
 Each enum is also linked to an NCI Thesaurus entry using the `enumDef` syntax.
 
-```
+```yaml
 coronary_artery_disease:
     description: >
       Reported Coronary Artery disease in the participant (HARMONIZED)

@@ -25,7 +25,7 @@ Links are what join the nodes of your data model together. The links go FROM the
 
 example links code from gdc dictionary `case.yaml`:
 
-```
+```yaml
 links:
   - name: experiments 
     backref: cases
@@ -46,7 +46,7 @@ Do not fully understand the use of 'non-exclusive relationships' vs multiple lin
 
 If a child can link to multiple parents, that is, be a child of either `parentA` OR `parentB` , simply list an additional link, example from gdc dictionary `clinical_test.yaml`
 
-```
+```yaml
 links:
   - name: cases 
     backref: clinical_tests
@@ -77,7 +77,7 @@ This allows for the following scenarios:
 
 Example from gdc dictionary `submitted_aligned_reads.yaml`
 
-```
+```yaml
 links:
   - exclusive: false
     required: true

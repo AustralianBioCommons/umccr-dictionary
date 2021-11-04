@@ -38,7 +38,7 @@ Am yet to come accross an example other than the one below. Not sure about the e
 
 Example from `study.yaml`
 
-```
+```yaml
 uniqueKeys:
   - [id]
   - [project_id, submitter_id]
