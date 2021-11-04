@@ -59,7 +59,7 @@ links:
 
 ## Link subgroups
 
-If a single node instance needs to link to multiple parents, and the linking is related in some way, a link `subgroup` can be specified. 
+If a single node instance needs to link to multiple parents, and the linking is related in some way, a link `subgroup` can be specified. The nature of how nodes are linked with a subgroup is by using a two boolean fields, `exclusive` and `required`, within the `links` block of the schema.
 
 This allows for the following scenarios:
 
