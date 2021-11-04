@@ -1,0 +1,329 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "lab_result"
+title: Laboratory Results
+type: object
+namespace: http://dcp.bionimbus.org
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Measurements obtained from blood or other laboratory tests required by a medical professional. These will include lipids and lipid metabolism parameters, lipid oxidation markers, cytokines, adhesion molecules, nitric oxide, and hemostasis/fibrinolysis markers.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: lab_results
+    label: describes
+    target_type: subject
+    multiplicity: one_to_one
+    required: true
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - type
+  - submitter_id
+  - subjects
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  triglycerides:
+    description: >
+      Triglycerides (mg/dl) (HARMONIZED)
+    type: number
+
+  ldl:
+    description: >
+      Ldl cholesterol (mg/dl) (HARMONIZED)
+    type: number
+
+  hdl:
+    description: >
+      Hdl cholesterol (mg/dl) (HARMONIZED)
+    type: number
+
+  total_cholesterol:
+    description: >
+      Total cholesterol (mg/dl) (HARMONIZED)
+    type: number
+
+  age_at_hemoglobin_mcnc_bld:
+    description: >
+      age at measurement of hemoglobin_mcnc_bld. (years) (HARMONIZED)
+    type: number
+  
+  unit_hemoglobin_mcnc_bld:
+    description: >
+      Measurement of hematocrit, the fraction of volume (vfr) of blood (bld) that is composed of red blood cells. (percentage) (HARMONIZED)
+    type: string
+
+  hematocrit_vfr_bld:
+    description: >
+      Measurement of hematocrit, the fraction of volume (vfr) of blood (bld) that is composed of red blood cells. (percentage) (HARMONIZED)
+    type: number
+
+  age_at_hematocrit_vfr_bld:
+    description: >
+      Measurement of hematocrit, the fraction of volume (vfr) of blood (bld) that is composed of red blood cells. (years) (HARMONIZED)
+    type: number
+
+  unit_hematocrit_vfr_bld:
+    description: >
+      harmonization unit for hematocrit_vfr_bld. (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  age_at_total_cholesterol:
+    description: >
+      age at measurement of total_cholesterol (years) (HARMONIZED)
+    type: number
+
+  unit_total_cholesterol:
+    description: >
+      harmonization unit for total_cholesterol (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  age_at_triglycerides:
+    description: >
+      age at measurement of triglycerides (HARMONIZED)
+    type: number
+
+  unit_triglycerides:
+    description: >
+      harmonization unit for triglycerides (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  age_at_hdl:
+    description: >
+      age at measurement of hdl (years) (HARMONIZED)
+    type: number
+
+  unit_hdl:
+    description: >
+      harmonization unit for hdl (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  age_at_ldl:
+    description: >
+      age at measurement of ldl (years) (HARMONIZED)
+    type: number
+
+  unit_ldl:
+    description: >
+      harmonization unit for ldl (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  age_at_eosinophil_ncnc_bld:
+    description: >
+      age at measurement of eosinophil_ncnc_bld (years) (HARMONIZED)
+    type: number
+
+  age_at_lymphocyte_ncnc_bld:
+    description: >
+      age at measurement of lymphocyte_ncnc_bld (years) (HARMONIZED)
+    type: number
+
+  age_at_mch_entmass_rbc:
+    description: >
+      age at measurement of mch_entmass_rbc (years) (HARMONIZED)
+    type: number
+
+  age_at_mchc_mcnc_rbc:
+    description: >
+      age at measurement of mchc_mcnc_rbc (years) (HARMONIZED)
+    type: number
+
+  age_at_mcv_entvol_rbc:
+    description: >
+      age at measurement of mcv_entvol_rbc (years) (HARMONIZED)
+    type: number
+
+  age_at_monocyte_ncnc_bld:
+    description: >
+      age at measurement of monocyte_ncnc_bld (years) (HARMONIZED)
+    type: number
+
+  age_at_neutrophil_ncnc_bld:
+    description: >
+      age at measurement of neutrophil_ncnc_bld (years) (HARMONIZED)
+    type: number
+
+  age_at_platelet_ncnc_bld:
+    description: >
+      age at measurement of platelet_ncnc_bld (years) (HARMONIZED)
+    type: number
+
+  age_at_pmv_entvol_bld:
+    description: >
+      age at measurement of pmv_entvol_bld (years) (HARMONIZED)
+    type: number
+
+  age_at_rbc_ncnc_bld:
+    description: >
+      age at measurement of rbc_ncnc_bld (years) (HARMONIZED)
+    type: number
+
+  age_at_rdw_ratio_rbc:
+    description: >
+      age at measurement of rdw_ratio_rbc (years) (HARMONIZED)
+    type: number
+
+  age_at_wbc_ncnc_bld:
+    description: >
+      age at measurement of wbc_ncnc_bld (years) (HARMONIZED)
+    type: number
+
+  basophil_ncnc_bld:
+    description: >
+      Count by volume, or number concentration (ncnc), of basophils in the blood (bld). (thousands / microliter) (HARMONIZED)
+    type: number
+
+  eosinophil_ncnc_bld:
+    description: >
+      Count by volume, or number concentration (ncnc), of eosinophils in the blood (bld). (thousands / microliter) (HARMONIZED)
+    type: number
+
+  hemoglobin_mcnc_bld:
+    description: >
+      Measurement of mass per volume, or mass concentration (mcnc), of hemoglobin in the blood (bld). (g / dL = grams per deciliter) (HARMONIZED)
+    type: number
+
+  lymphocyte_ncnc_bld:
+    description: >
+      Count by volume, or number concentration (ncnc), of lymphocytes in the blood (bld). (thousands / microliter) (HARMONIZED)
+    type: number
+
+  mch_entmass_rbc:
+    description: >
+      Measurement of the average mass (entmass) of hemoglobin per red blood cell(rbc), known as mean corpuscular hemoglobin (MCH). (pg = picogram) (HARMONIZED)
+    type: number
+
+  mchc_mcnc_rbc:
+    description: >
+      Measurement of the mass concentration (mcnc) of hemoglobin in a given volume of packed red blood cells (rbc), known as mean corpuscular hemoglobin concentration (MCHC). (g /dL = grams per deciliter) (HARMONIZED)
+    type: number
+
+  mcv_entvol_rbc:
+    description: >
+      Measurement of the mass concentration (mcnc) of hemoglobin in a given volume of packed red blood cells (rbc), known as mean corpuscular hemoglobin concentration (MCHC). (g /dL = grams per deciliter) (HARMONIZED)
+    type: number
+
+  monocyte_ncnc_bld:
+    description: >
+      Count by volume, or number concentration (ncnc), of monocytes in the blood (bld). (HARMONIZED)
+    type: number
+
+  neutrophil_ncnc_bld:
+    description: >
+      Count by volume, or number concentration (ncnc), of neutrophils in the blood (bld). (HARMONIZED)
+    type: number
+
+  platelet_ncnc_bld:
+    description: >
+      Count by volume, or number concentration (ncnc), of platelets in the blood (bld). (thousands / microliter) (HARMONIZED)
+    type: number
+  
+  pmv_entvol_bld:
+    description: >
+      Measurement of the mean volume (entvol) of platelets in the blood (bld), known as mean platelet volume (MPV or PMV). (fL = femtoliter) (HARMONIZED)
+    type: number
+
+  rbc_ncnc_bld:
+    description: >
+      Count by volume, or number concentration (ncnc), of red blood cells in the blood (bld). (millions / microliter) (HARMONIZED)
+    type: number
+
+  rdw_ratio_rbc:
+    description: >
+      Measurement of the ratio of variation in width to the mean width of the red blood cell (rbc) volume distribution curve taken at +/- 1 CV, known as red cell distribution width (RDW). (percentage) (HARMONIZED)
+    type: number
+
+  unit_basophil_ncnc_bld:
+    description: >
+      harmonization unit for basophil_ncnc_bld (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_eosinophil_ncnc_bld:
+    description: >
+      harmonization unit for eosinophil_ncnc_bld (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_lymphocyte_ncnc_bld:
+    description: >
+      harmonization unit for lymphocyte_ncnc_bld (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_mch_entmass_rbc:
+    description: >
+      harmonization unit for mch_entmass_rbc (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_mchc_mcnc_rbc:
+    description: >
+      harmonization unit for mchc_mcnc_rbc (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_monocyte_ncnc_bld:
+    description: >
+      harmonization unit for monocyte_ncnc_bld (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_neutrophil_ncnc_bld:
+    description: >
+      harmonization unit for neutrophil_ncnc_bld (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_platelet_ncnc_bld:
+    description: >
+      harmonization unit for platelet_ncnc_bld (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_pmv_entvol_bld:
+    description: >
+      harmonization unit for pmv_entvol_bld (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_rbc_ncnc_bld:
+    description: >
+      harmonization unit for rbc_ncnc_bld (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+  
+  unit_rdw_ratio_rbc:
+    description: >
+      harmonization unit for rdw_ratio_rbc (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED) 
+    type: string
+
+  unit_wbc_ncnc_bld:
+    description: >
+      harmonization unit for wbc_ncnc_bld (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  wbc_ncnc_bld:
+    description: >
+      Count by volume, or number concentration (ncnc), of white blood cells in the blood (bld). (thousands / microliter) (HARMONIZED)
+    type: number
+
+  age_at_basophil_ncnc_bld:
+    description: >
+      age at measurement of basophil_ncnc_bld (years) (HARMONIZED)
+    type: number
+
+  unit_mcv_entvol_rbc:
+    description: >
+      harmonization unit for mcv_entvol_rbc (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"

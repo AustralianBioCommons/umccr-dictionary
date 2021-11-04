@@ -1,0 +1,131 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "study"
+title: Study
+type: object
+namespace: https://dcp.bionimbus.org/
+category: administrative
+program: '*'
+project: '*'
+description: >
+  A coordinated set of actions and observations designed to generate data, with the ultimate goal
+  of discovery or hypothesis testing.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+
+links:
+  - name: projects
+    backref: studies
+    label: performed_for
+    target_type: project
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - type
+  - submitter_id
+  - projects
+  - study_id
+  - study_registration
+
+uniqueKeys:
+  - [ id ]
+  - [ project_id, submitter_id ]
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  data_description:
+    description: "Brief description of the data being provided for this study. Free text"
+    type: string
+
+  study_description:
+    description: "A brief description of the study being performed. Free text"
+    type: string
+
+  study_setup:
+    description: >
+      A high level description of the setup used to achieve the study objectives.
+    enum:
+      - Genotyping
+      - Expression
+
+  type_of_data:
+    description: "Is the data raw or processed?"
+    enum:
+      - Raw
+      - Processed
+      - Raw/Processed
+      
+  exclude_from_aggregations:
+    description: "Should the study be excluded from aggregations (e.g., Counts of total numbers of studies or total numbers of subjects) for users who are not authorized to access this study?"
+    type: boolean
+    
+  study_registration:
+    description: >
+      External source from which the identifier included in study_id originates.
+    type: string
+
+  study_id:
+    description: >
+      Unique identifier that can be used to retrieve more information for a study.
+    type: string
+
+  dbgap_accession:
+    description: >
+      The dbgap accession number provided for the project (example, phs123456.v1.p1.c1).
+    type: string
+    
+  dbgap_phs:
+    description: >
+      The dbGaP phs accession (example, phs123456).
+    type: string
+    
+  dbgap_version:
+    description: >
+      The dbGaP version (example, v1).
+    type: string
+    
+  dbgap_participant_set:
+    description: >
+      The dbGaP participant set (example, p1).
+    type: string
+    
+  dbgap_consent:
+    description: >
+      The dbGaP consent number (example, c1).
+    type: string
+    
+  dbgap_consent_text:
+    description: >
+      The dbGaP consent text (example, HMB-IRB).
+    type: string    
+    
+  authz:
+    description: >
+      The authz string (example, ["/programs/Program.name/projects/Project.code"] ).
+    type: array
+    items:
+      type: string
+        
+  short_name:
+    description: >
+      The shorthand name for the project.
+    type: string
+        
+  full_name:
+    description: >
+      The full name for the project.
+    type: string
+
+
+  projects:
+    $ref: "_definitions.yaml#/to_one_project"

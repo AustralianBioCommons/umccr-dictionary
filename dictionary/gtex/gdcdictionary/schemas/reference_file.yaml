@@ -1,0 +1,150 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "reference_file"
+title: Reference File
+type: object
+namespace: https://dcp.bionimbus.org/
+category: data_file
+program: '*'
+project: '*'
+description: "Data file containing any type of reference required for a data analysis."
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: reference_files
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: projects
+        backref: reference_files
+        label: data_from
+        target_type: project
+        multiplicity: many_to_one
+        required: false
+        
+required:
+  - type
+  - submitter_id
+  - file_name
+  - file_size
+  - md5sum
+  - data_category
+  - data_type
+  - data_format
+
+uniqueKeys:
+  - [ id ]
+  - [ project_id, submitter_id ]
+
+properties:
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    enum:
+      - Analysis Information
+      - Annotation Reference
+      - Clinical Data
+      - Familial Reference
+      - Sequencing Reference
+      - Variant Calling Reference 
+      - Other
+
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    enum:
+      - Kinship Matrix
+      - Principal Component      
+      - Script
+      - Sequencing Reference
+      - Unharmonized Clinical Data
+      - Variant Annotation
+      - Variant Call
+      - Other
+
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    enum:
+      - ALT
+      - AMB
+      - ANN
+      - AVRO
+      - BCF
+      - BED
+      - BNP
+      - BWT
+      - C
+      - CSV
+      - CTR
+      - DAT
+      - DTA
+      - DB
+      - DOC
+      - DOCX
+      - FAI
+      - FASTA
+      - FMT
+      - FOR
+      - GDS
+      - GRD
+      - GZ
+      - MD
+      - PAC
+      - PDF
+      - POS
+      - PPT
+      - R
+      - RDATA
+      - RTF
+      - SA
+      - SAS
+      - SAS7BDAT
+      - SAV
+      - STM
+      - TAR
+      - TBI
+      - TBL
+      - TSV
+      - TXT
+      - VCF
+      - WPD
+      - XLS
+      - XLSX
+      - XML
+      - ZIP
+      
+    
+  study_version:
+    description: >
+      The version of the study that was released by data source (e.g., dbGaP)
+    type: number
+    
+  source_file:
+    description: >
+      The originating compressed file's name.
+    type: string
+    
+    
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_many"
+  projects:
+    $ref: "_definitions.yaml#/to_many_project"

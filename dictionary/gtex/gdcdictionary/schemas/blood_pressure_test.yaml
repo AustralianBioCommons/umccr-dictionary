@@ -1,0 +1,76 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "blood_pressure_test"
+title: Blood Pressure Test
+type: object
+namespace: http://dcp.bionimbus.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Resting blood pressure will be measured in the right arm after five minutes in the seated position. An automated oscillometric method (Dinamap) and appropriate cuff size will be used. Three readings will be taken; the second and third readings will be averaged to obtain the blood pressure levels used in analyses. An additional systolic blood pressure will be measured in both the right and left brachial, posterior tibial, and dorsalis pedis arteries with a Doppler instrument. 
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: blood_pressure_test
+    label: describes
+    target_type: subject
+    multiplicity: one_to_one
+    required: true
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - submitter_id
+  - type
+  - subjects
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+# HARMONIZED VARIABLES ACROSS GTEX AND TOPMED PROJECTS
+  bp_diastolic:
+    description: >
+      Resting diastolic blood pressure from the upper arm in a clinical setting. (mmHg) (HARMONIZED)
+    type: number
+
+  bp_systolic:
+    description: >
+      Resting systolic blood pressure from the upper arm in a clinical setting. (mmHg) (HARMONIZED)
+    type: number
+  
+  age_at_bp_systolic:
+    description: >
+      age at measurement of bp_systolic (years) (HARMONIZED)
+    type: number
+
+  unit_bp_systolic:
+    description: >
+      harmonization unit for bp_systolic (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  age_at_bp_diastolic:
+    description: >
+      age at measurement of bp_diastolic (years) (HARMONIZED)
+    type: number
+
+  unit_bp_diastolic:
+    description: >
+      harmonization unit for bp_diastolic (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.)
+    type: string
+
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,97 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "medication"
+title: Medication Use Record
+type: object
+namespace: http://dcp.bionimbus.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Recods about historical medication use
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: medication_records
+    label: describes
+    target_type: subject
+    multiplicity: one_to_one
+    required: true
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - submitter_id
+  - type
+  - subjects
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+# HARMONIZED VARIABLES ACROSS GTEX AND TOPMED PROJECTS
+  hypertension_meds:
+    description: >
+      Take medication for hypertension (HARMONIZED)
+    type: boolean
+
+  lipid_lowering_medication:
+    description: >
+      Any lipid-lowering medication (HARMONIZED)
+    type: boolean
+
+  age_at_lipid_lowering_medication:
+    description: >
+      age at measurement of age_at_lipid1c (years) (HARMONIZED)
+    type: number
+  
+  unit_lipid_lowering_medication:
+    description: >
+      harmonization unit for unit_lipid1c (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  fasting_lipids:
+    description: >
+      Indicates whether participant fasted for at least eight hours prior to blood draw to measure lipids phenotypes. (HARMONIZED)
+    type: boolean
+
+  age_at_fasting_lipids:
+    description: >
+      age at measurement of fasting_lipids (years) (HARMONIZED)
+    type: number
+
+  unit_fasting_lipids:
+    description: >
+      harmonization unit for fasting_lipids (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+  
+  age_at_antihypertensive_meds:
+    description: >
+      age at measurement of antihypertensive_meds (years) (HARMONIZED)
+    type: number
+
+  antihypertensive_meds:
+    description: >
+      Indicator for use of antihypertensive medication at the time of blood pressure measurement. (HARMONIZED)
+    enum:
+      - "Not taking antihypertensive medication"
+      - "Taking antihypertensive medication"
+
+  unit_antihypertensive_meds:
+    description: >
+      harmonization unit for antihypertensive_meds (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"

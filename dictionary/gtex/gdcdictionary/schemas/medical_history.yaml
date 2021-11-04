@@ -1,0 +1,796 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "medical_history"
+title: Medical History
+type: object
+namespace: http://dcp.bionimbus.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Standard questionnaire used to collect medical records from the subject
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: medical_histories
+    label: describes
+    target_type: subject
+    multiplicity: one_to_one
+    required: true
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - submitter_id
+  - type
+  - subjects
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+
+# HARMONIZED VARIABLES ACROSS GTEX AND TOPMED PROJECTS
+  asthma:
+    description: >
+      Reported Asthma condition in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: asthma
+         source: NCI Thesaurus
+         term_id: C28397
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: asthma
+         source: hp
+         term_id: HP:0002099
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+    
+  diabetes:
+    description: >
+      Reported Diabetes in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: diabetes
+         source: NCI Thesaurus
+         term_id: C2985
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: diabetes
+         source: hp
+         term_id: HP:0000819
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  type1_diabetes:
+    description: >
+      Reported Type-1 Diabetes in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: type1_diabetes
+         source: NCI Thesaurus
+         term_id: C2986
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: type1_diabetes
+         source: hp
+         term_id: HP:0100651
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  type2_diabetes:
+    description: >
+      Reported Type-2 Diabetes in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: type2_diabetes
+         source: NCI Thesaurus
+         term_id: C26747
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: type2_diabetes
+         source: hp
+         term_id: HP:0005978
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  hypertension:
+    description: >
+      Reported Hypertension condition in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: hypertension
+         source: NCI Thesaurus
+         term_id: C3117
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: hypertension
+         source: hp
+         term_id: HP:0000822
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  hyperlipidemia:
+    description: >
+      Reported Hyperlipidemia condition in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: hyperlipidemia
+         source: NCI Thesaurus
+         term_id: C34707
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: hyperlipidemia
+         source: hp
+         term_id: HP:0003077
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  cerebrovascular_disease:
+    description: >
+      Reported Cerebrovascular disease in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: cerebrovascular_disease
+         source: NCI Thesaurus
+         term_id: C2938
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: cerebrovascular_disease
+         source: hp
+         term_id: 
+         term_version:
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  stroke:
+    description: >
+      Reported Stroke in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: stroke
+         source: NCI Thesaurus
+         term_id: C3390
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: stroke
+         source: hp
+         term_id: HP:0001297
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+    
+  copd:
+    description: >
+      Reported Chronic Obstructive Pulmonary Disease (COPD) in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: copd
+         source: NCI Thesaurus
+         term_id: C3199
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: copd
+         source: hp
+         term_id: HP:0006510
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  emphysema:
+    description: >
+      Reported Emphysema in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: emphysema
+         source: NCI Thesaurus
+         term_id: C3348
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: emphysema
+         source: hp
+         term_id: HP:0002097
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  chronic_respiratory_disease:
+    description: >
+      Reported Chronic Respiratory disease in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: chronic_respiratory_disease
+         source: NCI Thesaurus
+         term_id: C157816
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: chronic_respiratory_disease
+         source: hp
+         term_id: 
+         term_version:
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  coronary_artery_disease:
+    description: >
+      Reported Coronary Artery disease in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: coronary_artery_disease
+         source: NCI Thesaurus
+         term_id: C26732
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: coronary_artery_disease
+         source: hp
+         term_id: HP:0001677
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  heart_failure:
+    description: >
+      Reported Heart failure in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: heart_failure
+         source: NCI Thesaurus
+         term_id: C50577
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: heart_failure
+         source: hp
+         term_id: HP:0001635
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  myocardial_infarction:
+    description: >
+      Reported Myocardial Infarction in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: myocardial_infarction
+         source: NCI Thesaurus
+         term_id: C27996
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: myocardial_infarction
+         source: hp
+         term_id: HP:0001658
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  cabg_presence:
+    description: >
+      Reported presence of coronary artery bypass graft (CABG) in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: coronary_artery_disease
+         source: NCI Thesaurus
+         term_id: C26732
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: coronary_artery_disease
+         source: hp
+         term_id: HP:0001677
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  chronic_bronchitis:
+    description: >
+      Reported chronic bronchitis condition in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: chronic bronchitis
+         source: NCI Thesaurus
+         term_id: C26722
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: chronic bronchitis
+         source: hp
+         term_id: HP:0004469
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+
+  atrial_fibrillation:
+    description: >
+      Reported atrial fibrillation condition in the participant (HARMONIZED)
+    enum:
+        - "Yes"
+        - "No"
+        - "Not reported"
+        - "Unknown"
+    termDef:
+       - term: atrial fibrillation
+         source: NCI Thesaurus
+         term_id: C50466
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: atrial fibrillation
+         source: hp
+         term_id: HP:0005110
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Yes
+         source: NCI Thesaurus
+         term_id: C49488
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: No
+         source: NCI Thesaurus
+         term_id: C49487
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+  
+  vte_followup_start_age:
+    description: >
+      Age of subject at the start of the follow up period during which venousthromboembolism (VTE) events were reviewed and adjudicated. (years) (HARMONIZED)
+    type: number
+
+  unit_vte_followup_start_age:
+    description: >
+      harmonization unit for vte_followup_start_age (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  vte_prior_history:
+    description: >
+      An indicator of whether a subject had a venous thromboembolism (VTE)event prior to the start of the medical review process (includingself-reported events). (HARMONIZED)
+    type: boolean
+  
+  age_at_vte_prior_history:
+    description: >
+      age at measurement of vte_prior_history (years) (HARMONIZED)
+    type: number
+
+  unit_vte_prior_history:
+    description: >
+      harmonization unit for vte_prior_history (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  vte_case_status:
+    description: >
+      An indicator of whether a subject experienced a venous thromboembolismevent (VTE) that was verified by adjudication or by medical professionals. (HARMONIZED)
+    type: boolean
+
+  age_at_vte_case_status:
+    description: >
+      age at measurement of vte_case_status (HARMONIZED)
+    type: number
+
+  unit_vte_case_status:
+    description: >
+      harmonization unit for vte_case_status (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  cac_volume:
+    description: >
+      Coronary artery calcium volume using CT scan(s) of coronary arteries (HARMONIZED)
+    type: number
+
+  age_at_cac_volume:
+    description: >
+      age at measurement of cac_volume (years) (HARMONIZED)
+    type: number
+
+  unit_cac_volume:
+    description: >
+      harmonization unit for cac_volume (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  cac_score:
+    description: >
+      Coronary artery calcification (CAC) score using Agatston scoring of CT scan(s) of coronary arteries decimal (HARMONIZED)
+    type: number
+
+  age_at_cac_score:
+    description: >
+      age at measurement of cac_score (years) (HARMONIZED)
+    type: number
+
+  unit_cac_score:
+    description: >
+      harmonization unit for cac_score (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  cimt_1:
+    description: >
+      Common carotid intima-media thickness, calculated as the mean of two values: mean of multiple thickness estimates from the left far wall and from the right far wall. (HARMONIZED)
+    type: number
+  
+  age_at_cimt_1:
+    description: >
+      age at measurement of cimt_1 (years) (HARMONIZED)
+    type: number
+
+  unit_cimt_1:
+    description: >
+      harmonization unit for cimt_1 (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  cimt_2:
+    description: >
+      Common carotid intima-media thickness, calculated as the mean of four values: maximum of multiple thickness estimates from the left far wall, left near wall, right far wall, and right near wall. (mm) (HARMONIZED)
+    type: number
+
+  age_at_cimt_2:
+    description: >
+      age at measurement of cimt_2 (years) (HARMONIZED)
+    type: number
+
+  unit_cimt_2:
+    description: >
+      harmonization unit for cimt_2 (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  carotid_stenosis:
+    description: >
+      Extent of narrowing of the carotid artery. (HARMONIZED)
+    enum:
+      - "None"
+      - "1%-24%"
+      - "25%-49%"
+      - "50%-74%"
+      - "75%-99%"
+      - "100%"
+
+  age_at_carotid_stenosis:
+    description: >
+      age at measurement of carotid_stenosis (years) (HARMONIZED)
+    type: number
+
+  unit_carotid_stenosis:
+    description: >
+      harmonization unit for carotid_stenosis (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  carotid_plaque:
+    description: >
+      Presence or absence of carotid plaque. (HARMONIZED)
+    enum:
+      - "Plaque not present"
+      - "Plaque present"
+
+  age_at_carotid_plaque:
+    description: >
+      age at measurement of carotid_plaque (years) (HARMONIZED)
+    type: number
+
+  unit_carotid_plaque:
+    description: >
+      harmonization unit for carotid_plaque (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"

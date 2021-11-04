@@ -1,0 +1,109 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "imaging_file"
+title: Imaging File
+type: object
+namespace: https://niaid.bionimbus.org
+category: data_file
+program: '*'
+project: '*'
+description: >
+  Data file containing raw imaging data
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: imaging_files
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: subjects
+        backref: imaging_files
+        label: data_from
+        target_type: subject
+        multiplicity: many_to_one
+        required: false
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - type
+  - submitter_id
+  - file_name
+  - file_size
+  - md5sum
+  - data_category
+  - data_type
+  - data_format
+  - experimental_strategy
+
+properties:
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  type:
+    enum: [ "imaging_file" ]
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    type: string
+
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    type: string
+
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    type: string
+
+  experimental_strategy:
+    term:
+      $ref: "_terms.yaml#/experimental_strategy"
+    type: string
+
+  image_quality:
+    description: >
+      Good, poor, or average image quality
+    enum:
+      - "Good image quality"
+      - "Average image quality"
+      - "Poor image quality"
+      - "Not Reported"
+
+  series_instance_uid:
+    description: >
+      Formal identifier for this image or other content.
+    type: string
+
+  series_instance_number:
+    description: >
+      order number for this image or other content.
+    type: integer
+    
+  file_phase:
+    description: >
+      The image file's data release Phase for a particular study. 
+    type: integer 
+    
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,106 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "exposure"
+title: Exposure
+type: object
+namespace: http://dcp.bionimbus.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Clinically relevant patient information not immediately resulting from genetic predispositions.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: exposures
+    label: describes
+    target_type: subject
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - type
+  - submitter_id
+  - subjects
+
+preferred:
+  - cigarettes_per_day
+  - years_smoked
+
+uniqueKeys:
+  #unclear if want submitter ID for clinical
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+# HARMONIZED VARIABLES ACROSS GTEX AND TOPMED PROJECTS
+  smoking_status:
+    description: >
+      Smoking condition (HARMONIZED)
+    enum:
+      - "NEVER"
+      - "FORMER"
+      - "CURRENT"
+
+  years_smoked:
+    term:
+      $ref: "_terms.yaml#/years_smoked"
+    type:
+      - number
+      - "null"
+    maximum: 89
+    minimum: 0
+
+  years_smoked_gt89:
+    term:
+      $ref: "_terms.yaml#/years_smoked_gt89"
+    enum:
+      - "Yes"
+      - "No"
+  
+  current_smoker_baseline:
+    description: >
+      Indicates whether subject currently smokes cigarettes. (HARMONIZED)
+    type: boolean
+
+  age_at_current_smoker_baseline:
+    description: >
+      age at measurement of current_smoker_baseline (years) (HARMONIZED)
+    type: number
+
+  age_at_ever_smoker_baseline:
+    description: >
+      age at measurement of ever_smoker_baseline (years) (HARMONIZED)
+    type: number
+
+  ever_smoker_baseline:
+    description: >
+      Indicates whether subject ever regularly smoked cigarettes. (HARMONIZED)
+    enum:
+      - "Never a cigarette smoker"
+      - "Current or former cigarette smoker"
+
+  unit_current_smoker_baseline:
+    description: >
+      harmonization unit for current_smoker_baseline (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_ever_smoker_baseline:
+    description: >
+      harmonization unit for ever_smoker_baseline (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"

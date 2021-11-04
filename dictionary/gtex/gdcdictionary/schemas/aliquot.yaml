@@ -1,0 +1,110 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "aliquot"
+title: Aliquot
+type: object
+namespace: https://dcp.bionimbus.org/
+category: biospecimen
+program: '*'
+project: '*'
+description: >
+  Pertaining to a portion of the whole; any one of two or more samples of something, of the same
+  volume or weight.
+additionalProperties: false
+submittable: true
+validators: []
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+required:
+  - type
+  - submitter_id
+  - samples
+  - experimental_strategy
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+links:
+  - name: samples
+    backref: aliquots
+    label: derived_from
+    multiplicity: many_to_many
+    target_type: sample
+    required: true
+
+constraints: null
+
+# Aliquot properties
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  aliquot_quantity:
+    term:
+      $ref: "_terms.yaml#/aliquot_quantity"
+    type: number
+
+  aliquot_volume:
+    term:
+      $ref: "_terms.yaml#/aliquot_volume"
+    type: number
+
+  amount:
+    term:
+      $ref: "_terms.yaml#/amount"
+    type: number
+
+  analyte_isolation_batch_id:
+    description: >
+      Nucleic acid isolation batch ID
+    type: string
+
+  analyte_isolation_method:
+    description: >
+      Type of nucleic acid isolation batch
+    type: string
+
+  analyte_isolation_date:
+    $ref: "_definitions.yaml#/datetime"
+
+  analyte_type:
+    term:
+      $ref: "_terms.yaml#/analyte_type"
+    type: string
+
+  concentration:
+    term:
+      $ref: "_terms.yaml#/concentration"
+    type: number
+
+  exclude:
+    description: >
+      Samples flagged for removal from analysis
+    type: boolean
+
+  exclusion_criteria:
+    description: >
+      Additional remarks about flagged samples
+    type: string
+
+  experiment_batch_id:
+    description: >
+      Genotype or expression batch ID
+    type: string
+
+  experiment_date:
+    $ref: "_definitions.yaml#/datetime"
+
+  experimental_strategy:
+    description: >
+      The sequencing strategy used to generate the data file referred to by the ga4gh_drs_uri.
+    type: string
+
+  samples:
+    $ref: "_definitions.yaml#/to_one"

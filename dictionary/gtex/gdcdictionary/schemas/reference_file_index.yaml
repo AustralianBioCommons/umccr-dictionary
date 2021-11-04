@@ -1,0 +1,93 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "reference_file_index"
+title: Reference File Index
+type: object
+namespace: https://dcp.bionimbus.org
+category: index_file
+program: '*'
+project: '*'
+description: "Data file containing the index for a set of germline variants."
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: reference_files
+        backref: reference_file_indexes
+        label: derived_from
+        target_type: reference_file
+        multiplicity: many_to_many
+        required: false
+      - name: core_metadata_collections
+        backref: reference_file_indexes
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_many
+        required: false
+
+required:
+  - type
+  - submitter_id
+  - file_name
+  - file_size
+  - md5sum
+  - data_category
+  - data_type
+  - data_format
+
+uniqueKeys:
+  - [ id ]
+  - [ project_id, submitter_id ]
+
+properties:
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    enum:
+      - Simple Nucleotide Variation
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    enum:
+      - "Germline Variation Index"
+      - "Sequencing Reference Index"
+      - "Variant Reference Index"
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    enum: 
+      - BCF.CSI
+      - CSI
+      - TBI
+      - VCF.CSI
+      - ZIP
+  
+  study_version:
+    description: >
+      The version of the study that was released by data source (e.g., dbGaP)
+    type: number
+    
+  source_file:
+    description: >
+      The originating compressed file's name.
+    type: string
+    
+  reference_files:
+    $ref: "_definitions.yaml#/to_one"
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_many"

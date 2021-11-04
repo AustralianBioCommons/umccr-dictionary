@@ -1,0 +1,82 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "imaging_file_reference"
+title: Imaging File Reference
+type: object
+namespace: https://gen3.biodatacatalyst.nhlbi.nih.gov/
+category: data_file
+program: '*'
+project: '*'
+description: >
+  Reference data file for raw imaging data
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: imaging_file_references
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: imaging_files
+        backref: imaging_file_references
+        label: data_from
+        target_type: imaging_file
+        multiplicity: many_to_many
+        required: false
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - type
+  - submitter_id
+  - file_name
+  - file_size
+  - md5sum
+  - data_category
+  - data_type
+  - data_format
+
+properties:
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  type:
+    enum: [ "imaging_file_reference" ]
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    type: string
+
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    type: string
+
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    type: string
+    
+
+  imaging_files:
+    $ref: "_definitions.yaml#/to_many"
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_many"
+

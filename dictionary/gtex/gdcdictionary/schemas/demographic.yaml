@@ -1,0 +1,256 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "demographic"
+title: Demographic
+type: object
+namespace: https://dcp.bionimbus.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Data for the characterization of the patient by means of segementing the population (e.g.,
+  characterization by age, sex, or race).
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: demographics
+    label: describes
+    target_type: subject
+    multiplicity: one_to_one
+    required: true
+
+required:
+  - type
+  - submitter_id
+  - subjects
+
+uniqueKeys:
+  #unclear if want submitter ID for clinical
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+# HARMONIZED VARIABLES ACROSS GTEX AND TOPMED PROJECTS
+  age_at_index:
+    description: >
+      The subject's age (in years) on the reference or anchor date used during date obfuscation (HARMONIZED). If age is greater than 89 years, see 'age_at_index_gt89'.
+    type: number
+    maximum: 89
+    minimum: 0
+
+  age_at_index_gt89:
+    description: >
+      Indicate whether the subject's age (in years) on the reference or anchor date used during date obfuscation (HARMONIZED) is greater than 89 years.
+    enum:
+      - "Yes"
+      - "No"
+
+  annotated_sex:
+    term:
+      $ref: "_terms.yaml#/gender"
+    enum:
+      - female
+      - male
+      - unknown
+      - unspecified
+      - not reported
+
+  race:
+    term:
+      $ref: "_terms.yaml#/race"
+    enum:
+      - "white"
+      - "american indian or alaska native"
+      - "black or african american"
+      - "asian"
+      - "native hawaiian or other pacific islander"
+      - "hispanic"
+      - "multiple"
+      - "other"
+      - "Unknown"
+      - "not reported"
+      - "not allowed to collect"
+
+  ethnicity:
+    term:
+      $ref: "_terms.yaml#/ethnicity"
+    enum:
+      - "hispanic or latino"
+      - "inconsistent/contradictory"
+      - "not hispanic or latino"
+      - "Unknown"
+      - "not reported"
+      - "not allowed to collect"
+
+  weight:
+    term:
+      $ref: "_terms.yaml#/weight"
+    type: number
+
+  bmi_baseline:
+    term:
+      $ref: "_terms.yaml#/bmi"
+    type: number
+
+  height_baseline:
+    term:
+      $ref: "_terms.yaml#/height"
+    type: number
+
+  age_at_height_baseline:
+    description: >
+      age at measurement of height_baseline (years) (HARMONIZED)
+    type: number
+
+  unit_height_baseline:
+    description: >
+      harmonization unit for height_baseline (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_race:
+    description: >
+      harmonization unit for race (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_ethnicity:
+    description: >
+      harmonization unit for ethnicity (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+  
+  hispanic_subgroup:
+    description: >
+      classification of Hispanic/Latino background for Hispanic/Latino subjects where country or region of origin information is available (HARMONIZED)
+    enum:
+      - "CentralAmerican"
+      - "CostaRican"
+      - "Cuban"
+      - "Dominican"
+      - "Mexican"
+      - "PuertoRican"
+      - "SouthAmerican"
+
+  unit_hispanic_subgroup:
+    description: >
+      harmonization unit for hispanic_subgroup (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  age_at_bmi_baseline:
+    description: >
+      age at measurement of bmi (years) (HARMONIZED)
+    type: number
+
+  age_at_weight_baseline:
+    description: >
+      age at measurement of weight_baseline (years) (HARMONIZED)
+    type: number
+
+  subcohort:
+    description: >
+      A distinct subgroup within a study, generally indicating subjects who share similar characteristics due to study design. Subjects may belong to only one subcohort. (HARMONIZED)
+    enum:
+      - "Amish_HAPI"
+      - "Amish_Longevity"
+      - "Amish_Wellness"
+      - "ARIC_NoSubcohortStructure"
+      - "CARDIA_NoSubcohortStructure"
+      - "CFS_NoSubcohortStructure"
+      - "CHS_AfricanAmerican"
+      - "CHS_Original"
+      - "COPDGene_NoSubcohortStructure"
+      - "CRA_NoSubcohortStructure"
+      - "FHS_Gen3"
+      - "FHS_NewOffspringSpouse"
+      - "FHS_Offspring"
+      - "FHS_Omni1"
+      - "FHS_Omni2"
+      - "FHS_Original"
+      - "GENOA_AfricanAmerican"
+      - "GENOA_EuropeanAmerican"
+      - "GOLDN_NoSubcohortStructure"
+      - "HCHS_SOL_NoSubcohortStructure"
+      - "HVH_NoSubcohortStructure"
+      - "JHS_NoSubcohortStructure"
+      - "Mayo_VTE_GENEVA"
+      - "MESA_AirNR"
+      - "MESA_Classic"
+      - "MESA_Family"
+      - "SAS_NoSubcohortStructure"
+      - "WHI_ClinicalTrial"
+      - "WHI_ObservationalStudy"
+
+  unit_annotated_sex:
+    description: >
+      harmonization unit for annotated_sex (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_bmi_baseline:
+    description: >
+      harmonization unit for bmi_baseline (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_subcohort:
+    description: >
+      harmonization unit for subcohort (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  unit_weight_baseline:
+    description: >
+      harmonization unit for weight_baseline (A "harmonization unit" is a defined group of subjects whose phenotypes can be similarly processed.) (HARMONIZED)
+    type: string
+
+  weight_baseline:
+    description: >
+      Body weight at baseline. (kg) (HARMONIZED)
+    type: number
+    
+  population:
+    description: >
+      CHB Han Chinese in Beijing, China EAS; JPT Japanese in Tokyo, Japan EAS; CHS Southern Han Chinese EAS; CDX Chinese Dai in Xishuangbanna, China EAS; KHV Kinh in Ho Chi Minh City, Vietnam EAS; CEU Utah Residents (CEPH) with Northern and Western European Ancestry EUR; TSI Toscani in Italia EUR; FIN Finnish in Finland EUR; GBR British in England and Scotland EUR; IBS Iberian Population in Spain EUR; YRI Yoruba in Ibadan, Nigeria AFR; LWK Luhya in Webuye, Kenya AFR; GWD Gambian in Western Divisions in the Gambia AFR; MSL Mende in Sierra Leone AFR; ESN Esan in Nigeria AFR; ASW Americans of African Ancestry in SW USA AFR; ACB African Caribbeans in Barbados AFR; MXL Mexican Ancestry from Los Angeles USA AMR; PUR Puerto Ricans from Puerto Rico AMR; CLM Colombians from Medellin, Colombia AMR; PEL Peruvians from Lima, Peru AMR; GIH Gujarati Indian from Houston, Texas SAS; PJL Punjabi from Lahore, Pakistan SAS; BEB Bengali from Bangladesh SAS; STU Sri Lankan Tamil from the UK SAS; ITU Indian Telugu from the UK
+    enum:
+      - "CHB"
+      - "JPT"
+      - "CHS"
+      - "CDX"
+      - "KHV"
+      - "CEU"
+      - "TSI"
+      - "FIN"
+      - "GBR"
+      - "IBS"
+      - "YRI"
+      - "LWK"
+      - "GWD"
+      - "MSL"
+      - "ESN"
+      - "ASW"
+      - "ACB"
+      - "MXL"
+      - "PUR"
+      - "CLM"
+      - "PEL"
+      - "GIH"
+      - "PJL"
+      - "BEB"
+      - "STU"
+      - "ITU"
+      - "other"
+      - "Unknown"
+      - "not reported"
+      - "not allowed to collect"     
+
+    
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"

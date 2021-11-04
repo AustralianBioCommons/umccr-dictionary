@@ -1,0 +1,66 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "electrocardiogram_test"
+title: Electrocardiogram
+type: object
+namespace: http://dcp.bionimbus.org
+category: clinical
+program: '*'
+project: '*'
+description: >
+  A 12-lead ECG will be obtained and transmitted to the ECG Reading Center via telephone lines for Minnesota coding.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: electrocardiogram_tests
+    label: describes
+    target_type: subject
+    multiplicity: one_to_one
+    required: true
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - submitter_id
+  - type
+  - subjects
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+# HARMONIZED VARIABLES ACROSS GTEX AND TOPMED PROJECTS
+
+  pr_duration:
+    description: >
+      PR interval (msec) (HARMONIZED)
+    type: number
+
+  qrs_duration:
+    description: >
+      QRS interval (msec) (HARMONIZED)
+    type: number
+
+  qt_duration:
+    description: >
+      QT interval (msec) (HARMONIZED)
+    type: number
+
+  gtc_duration:
+    description: >
+      QTC interval (msec) (HARMONIZED)
+    type: number
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"
