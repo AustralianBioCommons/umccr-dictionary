@@ -11,19 +11,19 @@ nav_order: 2
 1. TOC
 {:toc}
 
-Links are what join the nodes of your data model together. The links go FROM the child TO the parent with the Program always being the ultimate root. Links are also described with a `backref`, `label` and `multiplicity` that should match up to one of the specified relationships in the `_definitions.yaml` file.
+Links are what join the nodes of your data model together. The links go **from** the child **to** the parent with the `Program` always being the ultimate root of the data model. Links are also described with a `backref`, `label` and `multiplicity` that should match up to one of the specified relationships in the `_definitions.yaml` file. All nodes must have at least one required link or link subgroup to ensure it will be joined to the rest of the data model.
 
 
-| Key          | Description                                                                                                         | example values                                                         |
-|--------------|---------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| name         | The name of the link from this schema to its parent, usually the parent's name in plural form                       |                                                                        |
-| backref      | The back reference from the parent back to the child, usually the name of the schema pluralised                     |                                                                        |
-| label        | A descriptor for the type of relationship. (Not sure if this is a controlled vocabulary or free text)               | `describes`, `member_of`, `derived_from`, `data_from`                          |
-| target_type  | the node id of the parent                                                                                           |                                                                        |
+| Key          | Description                              | example values      |
+|--------------|------------------------------------------|---------------------|
+| name         | The name of the link from this schema to its parent, usually the parent's name in plural form   |                 |
+| backref      | The back reference from the parent back to the child, usually the name of the schema pluralised |                 |
+| label        | A descriptor for the type of relationship. (Not sure if this is a controlled vocabulary or free text) | `describes`, `member_of`, `derived_from`, `data_from`  |
+| target_type  | the node id of the parent                                                                       |                                                              |
 | multiplicity | describes the numeric relationship from the child to the parent, these should be defined in the `_definitions.yaml` | `one_to_one`, `one_to_many`, `many_to_many`, `to_one_project`, `to_many_project` |
-| required     | Whether each instance of this schema needs to have this link                                                        | `true`, `false`                                                        |
+| required     | Whether each instance of this schema needs to have this link                                     | `true`, `false`  |
 
-example links code from gdc dictionary `case.yaml`:
+A simple example links code snippet from the gdc dictionary `case.yaml`:
 
 ```yaml
 links:
@@ -39,7 +39,7 @@ The above `links` snippet is specifying that a `case` is a `member_of` an `exper
 
 ## Multiple links
 
-If a child can link to multiple parents, that is, be a child of either `parentA` OR `parentB` , simply list an additional link, example from gdc dictionary `clinical_test.yaml`. Bear in mind that there has to be at least one link that has `required: true` to ensure that nodes are always connected to the rest of the graph.
+If a child can link to multiple parents, that is, be a child of either `parentA` AND/OR `parentB` , simply list an additional link, example from gdc dictionary `clinical_test.yaml`. Bear in mind that there has to be at least one link that has `required: true` to ensure that nodes are always connected to the rest of the graph.
 
 ```yaml
 links:
@@ -56,6 +56,8 @@ links:
     multiplicity: many_to_many
     required: false
 ```
+
+The `links` snippet above indicates that the `clinical_test` node must be linked to a `case` node (`required: true`), and that a single case may be linked to multiple `clinical_tests` (`multiplicity: many_to_one`). In addition, a `clinical_test` node may be optionally linked (`required: false`) to one or more `diagnosis` nodes. Multiple `diagnoses` may be linked to multiple `clinical_tests` (`multiplicity: many_to_many`).
 
 ## Link subgroups
 
