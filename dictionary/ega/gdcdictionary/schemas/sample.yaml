@@ -1,0 +1,59 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "sample"
+title: sample
+type: object
+namespace: EGA_embl-ebi
+category: biospecimen
+program: '*'
+project: '*'
+description: >-
+  A Sample defines an isolate of sequenceable material upon which
+  sequencing experiments can be based.  The Sample object may be a surrogate for taxonomy
+  accession or an anonymized individual identifier.  Or, it may fully specify
+  provenance and isolation method of the starting material.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: projects
+    backref: samples
+    label: describes
+    target_type: project
+    multiplicity: many_to_one
+    required: true
+  # - name: analyses
+  #   backref: samples
+  #   label: describes
+  #   target_type: analysis
+  #   multiplicity: many_to_many
+  #   required: false
+
+required:
+  - type
+  - submitter_id
+  - projects
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  projects:
+    $ref: "_definitions.yaml#/to_one_project"
+  
+  # analyses: 
+  #   $ref: "_definitions.yaml#/to_many"
+  
+  

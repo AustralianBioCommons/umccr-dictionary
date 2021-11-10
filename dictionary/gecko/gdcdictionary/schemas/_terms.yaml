@@ -21,6 +21,46 @@ a260_a280_ratio:
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432595&version=1.0"
 
+age:
+  description: >
+    Age at last visit. Age is encoded as ISO8601 duration. (CMG)
+  termDef:
+    term: Age at last visit. Age is encoded as ISO8601 duration.
+    source: Phenopackets
+    cde_id: ISO8601
+    cde_version: 1.0
+    term_url: "https://phenopackets-schema.readthedocs.io/en/latest/age.html#rstage"
+
+family_onset:
+  description: >
+    Typical age of onset for the family. Age is encoded as ISO8601 duration. (CMG)
+  termDef:
+    term: Typical age of onset for the family. Age is encoded as ISO8601 duration.
+    source: Phenopackets
+    cde_id: ISO8601
+    cde_version: 1.0
+    term_url: "https://phenopackets-schema.readthedocs.io/en/latest/age.html#rstage"
+
+disease_omim_id:
+  description: >
+    The ID of the term from OMIM which represents a disease. (CMG)
+  termDef:
+    term: The ID of the term from OMIM which represents a disease. (CMG)
+    source: OMIM
+    cde_id: OMIM
+    cde_version: 1.0
+    term_url: "https://www.ncbi.nlm.nih.gov/omim"
+
+phenotype_hpo_id:
+  description: >
+    The ID of the term from Human Phenotype Ontology which represents a harmonized phenotype. (CMG)
+  termDef:
+    term: The ID of the term from Human Phenotype Ontology which represents a harmonized phenotype. (CMG)
+    source: HPO
+    cde_id: HPO
+    cde_version: 1.0
+    term_url: "https://hpo.jax.org/app/"
+
 adapter_name: # TOREVIEW
   description: >
     Name of the sequencing adapter.
@@ -29,9 +69,33 @@ adapter_sequence: # TOREVIEW
   description: >
     Base sequence of the sequencing adapter.
 
+age_of_onset:
+  description: >
+    Age of onset (if affected). Otherwise age of last exam or phenotype transfer. (CMG)
+  termDef:
+    term: Age of onset (if affected). Otherwise age of last exam or phenotype transfer. (CMG)
+    source: Phenopackets
+    cde_id: ISO8601
+    cde_version: 1.0
+    term_url: "https://phenopackets-schema.readthedocs.io/en/latest/age.html#rstage"
+
+age_at_event_days_gt89:
+  description: >
+    Indicate whether the 'Age at the time an event occurs expressed in the number of days since birth' is greater than 32872 days (89 years).
+
 age_at_diagnosis:
   description: >
-    Age at the time of diagnosis expressed in number of days since birth.
+    Age at the time of diagnosis expressed in number of days since birth. If the age at diagnosis is greater than 32872 days (89 years), then see 'age_at_diagnosis_gt89'.
+  termDef:
+    term: Patient Diagnosis Age Day Value
+    source: caDSR
+    cde_id: 3225640
+    cde_version: 2.0
+    term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3225640&version=2.0"
+
+age_at_diagnosis_gt89:
+  description: >
+    Indicate whether the age at the time of diagnosis expressed in number of days since birth is greater than 32872 days (89 years).
   termDef:
     term: Patient Diagnosis Age Day Value
     source: caDSR
@@ -140,16 +204,10 @@ alcohol_history:
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2201918&version=1.0"
 
-alcohol_intensity:
+drink_number:
   description: >
-    Category to describe the patient's current level of alcohol use as self-reported by the patient.
-  termDef:
-    term: Person Self-Report Alcoholic Beverage Exposure Category
-    source: caDSR
-    cde_id: 3457767
-    cde_version: 1.0
-    term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3457767&version=1.0"
-
+    Units of drink consumed during Drink Period (DRNKPRD). (GTEx)
+  
 aliquot_quantity:
   description: >
     The quantity in micrograms (ug) of the aliquot(s) derived from the analyte(s) shipped for
@@ -288,7 +346,7 @@ biomarker_name:
     term: Biomarker Name
     source: caDSR
     cde_id: 5473
-    cde_version: 11.0 
+    cde_version: 11.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5473&version=2.31"
 
 biomarker_result:
@@ -311,19 +369,29 @@ biomarker_test_method:
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3121575&version=1.0"
 
-biospecimen_anatomic_site:
+biospecimen_anatomic_site_id:
   description: >
-    Text term that represents the name of the primary disease site of the submitted tumor sample.
+    Uberon ID, anatomical location as described by the Uber Anatomy Ontology (UBERON). (CMG)
   termDef:
-    term: Submitted Tumor Sample Primary Anatomic Site
-    source: caDSR
-    cde_id: 4742851
+    term: Uberon ID, anatomical location as described by the Uber Anatomy Ontology (UBERON). (CMG)
+    source: Uberon
+    cde_id: Uberon
     cde_version: 1.0
-    term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=4742851&version=1.0"
+    term_url: "https://www.ebi.ac.uk/ols/ontologies/uberon"
+
+biospecimen_anatomic_site_label:
+  description: >
+    Uberon Label, anatomical location as described by the Uber Anatomy Ontology (UBERON). (CMG)
+  termDef:
+    term: Uberon Label, anatomical location as described by the Uber Anatomy Ontology (UBERON). (CMG)
+    source: Uberon
+    cde_id: Uberon
+    cde_version: 1.0
+    term_url: "https://www.ebi.ac.uk/ols/ontologies/uberon"
 
 bmi:
   description: >
-    The body mass divided by the square of the body height expressed in units of kg/m^2.
+    Autocalculated field of BMI: general indicator of the body fat an individual is carrying based upon the ratio of weight to height. BMI = 703 * weight in pounds/height in inches squared. (GTEx)
   termDef:
     term: Body Mass Index (BMI)
     source: caDSR
@@ -462,7 +530,7 @@ data_format: # TOREVIEW
 
 data_type: # TOREVIEW
   description: >
-    Specific content type of the data file.
+    Specific content type of the data file. (CMG)
 
 datetime:
   description: >
@@ -618,7 +686,7 @@ dlco_ref_predictive_percent:
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2180255&version=1.0"
 
-encoding: 
+encoding:
   description: >
     Version of ASCII encoding of quality values found in the file.
   termDef:
@@ -651,8 +719,8 @@ estrogen_receptor_result_ihc:
 ethnicity:
   description: >
     An individual's self-described social and cultural grouping, specifically whether an individual
-    describes themselves as Hispanic or Latino. The provided values are based on the categories
-    defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau.
+    describes themselves as Hispanic or Latino (HARMONIZED). The provided values are based on the categories
+    defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau. (CMG, GTEx)
   termDef:
     term: Ethnic Group Category Text
     source: caDSR
@@ -666,8 +734,8 @@ experiment_name: # TOREVIEW
 
 experimental_strategy: # TOREVIEW
   description: >
-    The sequencing strategy used to generate the data file.
-
+    The sequencing strategy used to generate the data file referred to by the ga4gh_drs_uri.
+    
 fastq_name: # TOREVIEW
   description: >
     Names of FASTQs.
@@ -728,6 +796,10 @@ figo_stage:
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3225684&version=1.0"
 
+file_format:
+  description: >
+    The format of the data file object.
+
 file_name: # TOREVIEW
   description: >
     The name (or part of a name) of a file (of any type).
@@ -754,11 +826,15 @@ freezing_method:
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432607&version=1.0"
 
-gender:
+ga4gh_drs_uri:
   description: >
-    Text designations that identify gender. Gender is described as the assemblage of properties that
+    DRS URI as defined by GA4GH DRS spec for pointers to file objects.
+
+sex:
+  description: >
+    Text designations that identify gender (HARMONIZED). Gender is described as the assemblage of properties that
     distinguish people on the basis of their societal roles. [Explanatory Comment 1: Identification
-    of gender is based upon self-report and may come from a form, questionnaire, interview, etc.]
+    of gender is based upon self-report and may come from a form, questionnaire, interview, etc.] (CMG)
   termDef:
     term: Person Gender Text Type
     source: caDSR
@@ -768,7 +844,7 @@ gender:
 
 height:
   description: >
-    The height of the patient in centimeters.
+    The height of Donor in inches as reported by Donor, family/next of kin, or medical record abstraction. (GTEx)
   termDef:
     term: Patient Height Measurement
     source: caDSR
@@ -882,6 +958,10 @@ is_ffpe:
 is_paired_end: # TOREVIEW
   description: >
     Are the reads paired end?
+    
+is_proband: # TOREVIEW
+  description: >
+    Boolean value to determine if the case is the proband.
 
 last_known_disease_status:
   description: >
@@ -1091,10 +1171,9 @@ oct_embedded:
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432538&version=1.0"
 
-pack_years_smoked:
+years_smoked:
   description: >
-    Numeric computed value to represent lifetime tobacco exposure defined as number of cigarettes
-    smoked per day x number of years smoked divided by 20.
+    Number of years the Donor smoked. (GTEx)
   termDef:
     term: Person Cigarette Smoking History Pack Year Value
     source: caDSR
@@ -1275,15 +1354,6 @@ preservation_method:
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432521&version=1.0"
 
-primary_diagnosis:
-  description: >
-    Text term for the structural pattern of cancer cells used to define a microscopic diagnosis.
-  termDef:
-    term: Neoplasm Histologic Type Name
-    source: caDSR
-    cde_id: 3081934
-    cde_version: 3.0
-    term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3081934&version=3.0"
 
 prior_malignancy:
   description: >
@@ -1357,11 +1427,11 @@ qc_metric_state:
 
 race:
   description: >
-    An arbitrary classification of a taxonomic group that is a division of a species. It usually
+    An arbitrary classification of a taxonomic group that is a division of a species (HARMONIZED). It usually
     arises as a consequence of geographical isolation within a species and is characterized by
     shared heredity, physical attributes and behavior, and in the case of humans, by common history,
     nationality, or geographic distribution. The provided values are based on the categories defined
-    by the U.S. Office of Management and Business and used by the U.S. Census Bureau.
+    by the U.S. Office of Management and Business and used by the U.S. Census Bureau. (GTEx)
   termDef:
     term: Race Category Text
     source: caDSR
@@ -1386,6 +1456,17 @@ relationship_age_at_diagnosis:
     cde_id: 5300571
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5300571&version=1.0"
+
+relationship_to_proband:
+  description: >
+    The subgroup that describes the state of connectedness between members of the unit of society
+    organized around kinship ties.
+  termDef:
+    term: Family Member Relationship Type
+    source: caDSR
+    cde_id: 2690165
+    cde_version: 2.0
+    term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2690165&version=2.0"
 
 relationship_type:
   description: >
@@ -1777,7 +1858,7 @@ vital_status:
 
 weight:
   description: >
-    The weight of the patient measured in kilograms.
+    The weight of the patient measured in lbs (HARMONIZED).
   termDef:
     term: Patient Weight Measurement
     source: caDSR
@@ -1832,7 +1913,17 @@ year_of_death:
 
 years_smoked:
   description: >
-    Numeric value (or unknown) to represent the number of years a person has been smoking.
+    Numeric value (or unknown) to represent the number of years a person has been smoking (HARMONIZED). If the number of years is greater than 89, see 'years_smoked_gt89'.
+  termDef:
+    term: Person Smoking Duration Year Count
+    source: caDSR
+    cde_id: 3137957
+    cde_version: 1.0
+    term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3137957&version=1.0"
+
+years_smoked_gt89:
+  description: >
+    Indicate whether the numeric value to represent the number of years a person has been smoking (HARMONIZED) is greater than 89 years.
   termDef:
     term: Person Smoking Duration Year Count
     source: caDSR

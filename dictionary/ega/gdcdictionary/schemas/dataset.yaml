@@ -1,0 +1,116 @@
+$schema: "http://json-schema.org/draft-08/schema#"
+
+id: "dataset"
+title: dataset
+type: object
+namespace: EGA_embl-ebi
+category: study_administration
+program: '*'
+project: '*'
+description: Describes an object that contains the samples in the data set.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+uniqueKeys:
+ - [id]
+ - [project_id, submitter_id]
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+    - name: RUN_REF
+      backref: dataset
+      label: describes
+      target_type: run
+      multiplicity: one_to_many
+      required: false
+    - name: ANALYSIS_REF
+      backref: dataset
+      label: describes
+      target_type: analysis
+      multiplicity: one_to_many
+      required: false 
+  - name: POLICY_REF
+    backref: dataset
+    label: describes
+    target_type: policy
+    multiplicity: one_to_one
+    required: true 
+  # - name: projects
+  #   backref: dataset
+  #   label: describes
+  #   target_type: project
+  #   multiplicity: many_to_one
+  #   required: true
+
+required:
+  - type
+  # - projects
+  - submitter_id
+  - POLICY_REF
+  - TITLE
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  TITLE:
+    description: Short text that can be used to call out data sets in searches or in displays.
+    type: string
+  
+  DESCRIPTION:
+    description: Free-form text describing the data sets.
+    type: string
+
+  DATASET_TYPE:
+    description: A controlled vocabulary of the type of technique that was used to generate the data.
+    type: array
+    items:
+      enum:
+        - "Whole genome sequencing"
+        - "Exome sequencing"
+        - "Genotyping by array"
+        - "Transcriptome profiling by high-throughput sequencing"
+        - "Transcriptome profiling by array"
+        - "Amplicon sequencing"
+        - "Methylation binding domain sequencing"
+        - "Methylation profiling by high-throughput sequencing"
+        - "Phenotype information"
+        - "Study summary information"
+        - "Genomic variant calling"
+        - "Chromatin accessibility profiling by high-throughput sequencing"
+        - "Histone modification profiling by high-throughput sequencing"
+        - "Chip-Seq"
+
+  DATASET_LINKS:
+    description: Links to related resources.
+    type: array
+    items:
+      type: string
+  
+  DATASET_ATTRIBUTES:
+    description: Properties and attributes of the data set. These can be entered as free-form tag-value pairs. Submitters may be asked to follow a community established ontology when describing the work.
+    type: array
+    items:
+      $ref: "_definitions.yaml#/tag_value_pair"
+
+  # Links to other nodes
+
+  RUN_REF:
+    $ref: "_definitions.yaml#/to_many"
+  ANALYSIS_REF:
+    $ref: "_definitions.yaml#/to_many"
+  POLICY_REF:
+    $ref: "_definitions.yaml#/to_one"
+
+  # projects: 
+  #   $ref: "_definitions.yaml#/to_one_project"

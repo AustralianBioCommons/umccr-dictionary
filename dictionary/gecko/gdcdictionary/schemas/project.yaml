@@ -10,7 +10,7 @@ description: >
   Any specifically defined piece of work that is undertaken or attempted to meet a single
   requirement. (NCIt C47885)
 additionalProperties: false
-submittable: true
+submittable: true 
 validators: null
 
 systemProperties:
@@ -21,10 +21,10 @@ systemProperties:
   - intended_release_date
 
 required:
-  - code
-  - name
-  - dbgap_accession_number
+  - code 
+  - name 
   - programs
+  - dbgap_accession_number
 
 uniqueKeys:
   - [ id ]
@@ -53,12 +53,6 @@ properties:
   code:
     type: string
     description: "Unique identifier for the project."
-  investigator_name:
-    description: "Name of the principal investigator for the project."
-    type: string
-  investigator_affiliation:
-    description: "The investigator's affiliation with respect to a research institution."
-    type: string
   date_collected:
     description: "The date or date range in which the project data was collected."
     type: string
@@ -144,4 +138,61 @@ properties:
     format: date-time
   dbgap_accession_number:
     type: string
-    description: "The dbgap accession number provided for the project."
+    description: "The dbgap accession number provided for the project. (CMG)"
+    
+  dbgap_phs:
+    description: >-
+      The dbGaP phs accession.
+    type: string
+    
+  dbgap_version:
+    description: >-
+      The dbGaP version (example, v1).
+    type: string
+    
+  dbgap_participant_set:
+    description: >-
+      The dbGaP participant set (example, p1).
+    type: string
+    
+  dbgap_consent:
+    description: >-
+      The dbGaP consent number (example, c1).
+    type: string
+    
+  dbgap_consent_text:
+    description: >-
+      The dbGaP consent text (example, HMB-IRB).
+    type: string    
+    
+  authz:
+    description: >-
+      The authz string (example, ["/programs/Program.name/projects/Project.code"] ).
+    type: array
+    items:
+      type: string
+        
+  short_name:
+    description: >-
+      The shorthand name for the project.
+    type: string
+        
+  full_name:
+    description: >-
+      The full name for the project.
+    type: string
+        
+  study_description:
+    description: >-
+      The description for the project.
+    type: string    
+
+  study_registration:
+    description: >-
+      External source from which the identifier included in study_id originates
+    type: string
+    
+  study_id:
+    description: >-
+      Unique identifier that can be used to retrieve more information for a study
+    type: string

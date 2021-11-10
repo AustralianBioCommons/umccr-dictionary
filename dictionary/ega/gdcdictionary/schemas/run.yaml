@@ -1,0 +1,56 @@
+$schema: "http://json-schema.org/draft-08/schema#"
+
+id: "run"
+title: run
+type: object
+namespace: EGA_embl-ebi
+category: experimental_methods
+program: '*'
+project: '*'
+description: A run contains a group of reads generated for a particular experiment.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+uniqueKeys:
+ - [id]
+ - [project_id, submitter_id]
+
+links:
+  - name: experiments
+    backref: run
+    label: composed_of
+    target_type: experiment
+    multiplicity: many_to_one
+    required: true
+  - name: datasets
+    backref: run
+    label: composed_of
+    target_type: dataset
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - type
+  - experiments
+  - datasets
+  - submitter_id
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  # $ref: "_sra_common.yaml"
+
+  experiments: 
+    $ref: "_definitions.yaml#/to_one"
+
+  datasets: 
+    $ref: "_definitions.yaml#/to_one"

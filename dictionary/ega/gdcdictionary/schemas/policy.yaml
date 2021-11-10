@@ -1,0 +1,104 @@
+$schema: "http://json-schema.org/draft-08/schema#"
+
+id: "policy"
+title: policy
+type: object
+namespace: EGA_embl-ebi
+category: administrative
+program: '*'
+project: '*'
+description: Describes an object that contains data access policy information.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+uniqueKeys:
+ - [id]
+ - [project_id, submitter_id]
+
+links:
+  - name: DAC_REF
+    backref: policy
+    label: describes
+    target_type: dac
+    multiplicity: one_to_one
+    required: true
+  # - name: datasets
+  #   backref: policy
+  #   label: describes
+  #   target_type: dataset
+  #   multiplicity: one_to_many
+  #   required: true
+
+required:
+  - type
+  # - datasets
+  - DAC_REF
+  - submitter_id
+  - TITLE
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  TITLE:
+    description: Short text that can be used to call out data access policies in searches or in displays.
+    type: string
+  
+  POLICY_TEXT: 
+    description: Text containing the policy.
+    type: string
+  
+  POLICY_FILE:
+    description: File containing the policy text.
+    type: string
+
+  DATA_USES:
+    description: Data use ontologies (DUO) related to the policy
+    type: array
+    items: 
+      type: object
+      required:
+        - ontology
+        - code
+        - version
+      properties: 
+        MODIFIER:
+          description: Describes modifiers to the Data Use Restriction
+          type: string
+          pattern: "^DUO:[0-9]{7}$"
+        URL:
+          description: Link to URL describing the Data Use
+          type: string
+        ontology:
+          description: Ontology abbreviation, e.g. DUO for Data Use Ontology
+          type: string
+        code:
+          description: Code for the ontology
+          type: string
+          pattern: "^DUO:[0-9]{7}$"
+        version:
+          description: Data Use Ontology code version
+          type: string
+
+  POLICY_LINKS:
+    description: Links to related resources.
+    type: array
+    items:
+      type: string
+
+  POLICY_ATTRIBUTES:
+    description: Properties and attributes of the policy. These can be entered as free-form tag-value pairs. Submitters may be asked to follow a community established ontology when describing the work.
+    type: array
+    items:
+      $ref: "_definitions.yaml#/tag_value_pair"
+
+  DAC_REF: 
+    $ref: "_definitions.yaml#/to_one"

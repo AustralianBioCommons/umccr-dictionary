@@ -1,0 +1,71 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "biosample"
+title: biosample
+type: object
+namespace: https://cineca-project.eu
+category: biospecimen
+program: '*'
+project: '*'
+description: CINECA Data Model, biosample (NCIT:C43412)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+uniqueKeys:
+ - [id]
+ - [project_id, submitter_id]
+
+links:
+  - name: cohorts
+    backref: biosamples
+    label: describes
+    target_type: cohort
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - type
+  - cohorts
+  - submitter_id
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  sampleType:
+    description: sample type (Body fluid or substance NCIT:C13236)
+    enum:
+      - "urine"
+      - "blood"
+      - "stool"
+      - "saliva"
+      - "other"
+  
+  sampleSubType:
+    type: string
+    description: sample sub type if present (blood venous or arterial, fasting or non-fasting)
+  
+  availability:
+    type: array
+    items:
+      type: string 
+    description: |
+      For each biosample present, is it available/accessible for research? (DUO codes)
+  processingMethod:
+    type: string
+    description: For each biosample present, what was the processing method used? (string or enum?)
+  
+  storageMethod:
+    type: string
+    description: For each biosample present, what is the storage method? (MIABIS codes, Categorical)
+  
+  cohorts:
+    $ref: "_definitions.yaml#/to_one"

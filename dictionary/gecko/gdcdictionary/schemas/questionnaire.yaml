@@ -1,0 +1,202 @@
+$schema: "http://json-schema.org/draft-08/schema#"
+
+id: "questionnaire"
+title: questionnaire
+type: object
+namespace: https://cineca-project.eu
+category: administrative
+program: '*'
+project: '*'
+description: CINECA Data Model, questionnaire/survey data (NCIT:C17176)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+uniqueKeys:
+ - [id]
+ - [project_id, submitter_id]
+
+links:
+  - name: cohorts
+    backref: questionnaire
+    label: describes
+    target_type: cohort
+    multiplicity: one_to_one
+    required: true
+
+required:
+  - type
+  - cohorts
+  - submitter_id
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  demographic:
+    type: object
+    description:  If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
+      socio-demographic and economic characteristics
+    properties:
+      age:
+        type: string
+        description: age
+      biologicalSex:
+        type: string
+        description: biological Sex
+      gender:
+        type: string
+        description: gender
+      ethnicity:
+        type: string
+        description: ethnicity
+      genealogy:
+        type: string
+        description: genealogy
+      birthPlace:
+        type: string
+        description: birth place
+      residence:
+        type: string
+        description: residence
+      education:
+        type: string
+        description: education
+      householdStructure:
+        type: string
+        description: family and household structure
+  lifestyle:
+    type: object
+    description:  |
+      If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
+      lifestyle and behaviours (lifestyle NCIT:C16795)
+    properties:
+      tobacco:
+        type: string
+        description: tobacco
+      alcohol:
+        type: string
+        description: alcohol
+      physicalActivity:
+        type: string
+        description: physical activity
+      sleep:
+        type: string
+        description: sleep
+      nutrition:
+        type: string
+        description: nutrition
+  Physician:
+    type: string
+    description: physician/practitioner info
+  diseases:
+    type: object
+    description:  |
+      If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
+      diseases (Disease or Disorder NCIT:C2991)
+    properties:
+      bloodRelatedDisorders:
+        type: string
+        description: blood-related disorders
+      endocrine:
+        type: string
+        description: endocrine/nutritional/metabolic disorders
+      mentalAndBehaviourDisorders:
+        type: string
+        description: mental and behaviour disorders
+      nervousSystem:
+        type: string
+        description: nervous system
+      digestiveSystem:
+        type: string
+        description: digestive system
+      respiratorySystem:
+        type: string
+        description: respiratory system
+      circulatorySystem:
+        type: string
+        description: circulatory system
+      oncological:
+        type: string
+        description: oncological
+      other:
+        type: string
+        description: other diseases not caputred above
+  symptoms:
+    type: string
+    description:  |
+      If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
+      signs and symptoms (Sign or Symptom NCIT:C100104)
+  physiologicalMeasurements:
+    type: object
+    description: |
+      If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
+      physiological measurements
+    properties:
+      anthropometry:
+        type: object
+        description: anthropometry
+        properties:
+          weight:
+            type: number
+            description: weight
+          height:
+            type: number
+            description: height
+      circulationAndRespirationge:
+        type: object
+        description: circulation and respiration
+        properties:
+          bloodPressure:
+            type: number
+            description: blood pressure
+          heartRate:
+            type: number
+            description: heart rate (HR)
+  nonPharmacologicalInterventions:
+    type: object
+    description: |
+      If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
+      non-pharmacological interventions
+    properties:
+      age:
+        type: string
+        description: |
+          If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
+  medication:
+    type: object
+    description: |
+      If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
+      medication (Medication NCIT:C459)
+    properties:
+      associatedDiseases:
+        type: string
+        description: associated diseases
+      prescription:
+        type: string
+        description: prescription
+      drugResponse:
+        type: string
+        description: drug responses
+      posology:
+        type: string
+        description: posology
+      administrationMethod:
+        type: string
+        description: administration method
+      other:
+        type: string
+        description: other medication
+  lifeStage:
+    type: string
+    description: |
+      If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
+      life stage
+

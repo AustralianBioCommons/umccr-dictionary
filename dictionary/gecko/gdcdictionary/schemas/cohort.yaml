@@ -1,0 +1,44 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "cohort"
+title: cohort
+type: object
+namespace: https://cineca-project.eu
+category: clinical
+program: '*'
+project: '*'
+description: CINECA Cohort data schema
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: projects
+    backref: cohorts
+    label: describes
+    target_type: project
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - type
+  - submitter_id
+  - projects
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+  
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  projects:
+    $ref: "_definitions.yaml#/to_one_project"
