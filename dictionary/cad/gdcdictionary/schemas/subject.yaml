@@ -11,7 +11,7 @@ links:
   name: projects
   required: true
   target_type: project
-namespace: https://gen3.theanvil.io
+namespace: https://gen3.biocommons.org.au
 program: '*'
 project: '*'
 properties:
