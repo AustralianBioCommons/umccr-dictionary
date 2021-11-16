@@ -1,0 +1,108 @@
+$schema: http://json-schema.org/draft-04/schema#
+additionalProperties: false
+category: clinical
+description: Biospecimen information that links subjects to samples including sample's
+  provider, source, dbgap sample detail and so forth.
+id: lab_result
+links:
+- backref: lab_results
+  label: describes
+  multiplicity: many_to_one
+  name: subjects
+  required: true
+  target_type: subject
+namespace: https://gen3.biocommons.org.au
+program: '*'
+project: '*'
+properties:
+  $ref: _definitions.yaml#/ubiquitous_properties
+  estimated_gfr:
+    description: estimated glomerular filtration rate (mL/min/1.73m2)
+    termDef:
+    - source: efo
+      term: glomerular filtration rate
+      term_id: EFO:0005208
+      term_version: None
+    type: number
+  fasting_blood_glucose:
+    description: fasting blood glucose level (mmol/l)
+    termDef:
+    - source: efo
+      term: fasting blood glucose measurement
+      term_id: EFO:0004465
+      term_version: None
+    type: number
+  glycated_haemoglobin:
+    description: glycated haemogloblin (%)
+    termDef:
+    - source: efo
+      term: HbA1c measurement
+      term_id: EFO:0004541
+      term_version: None
+    type: number
+  hdl_c:
+    description: Blood mass concentration of high-density lipoprotein cholesterol
+      (mg/dL)
+    termDef:
+    - source: efo
+      term: HDL cholesterol
+      term_id: CHEBI:47775
+      term_version: None
+    type: number
+  ldl_c:
+    description: Blood mass concentration of low-density lipoprotein cholesterol (mg/dL)
+    termDef:
+    - source: efo
+      term: LDL cholesterol
+      term_id: EFO:0004195
+      term_version: None
+    type: number
+  subjects:
+    $ref: _definitions.yaml#/to_one
+  total_cholesterol:
+    description: Blood mass concentration of total cholesterol (mg/dL)
+    termDef:
+    - source: efo
+      term: cholesterol
+      term_id: CHEBI:16113
+      term_version: None
+    type: number
+  triglycerides:
+    description: Blood mass concentration of triglycerides (mg/dL)
+    termDef:
+    - source: efo
+      term: triglyceride measurement
+      term_id: EFO:0004530
+      term_version: None
+    type: number
+  two_hours_blood_glucose:
+    description: two hours plasma glucose level (mmol/l)
+    termDef:
+    - source: null
+      term: null
+      term_id: null
+      term_version: None
+    type: number
+required:
+- type
+- subjects
+- submitter_id
+- total_cholesterol
+- hdl_c
+- ldl_c
+- triglycerides
+- estimated_gfr
+submittable: true
+systemProperties:
+- id
+- project_id
+- state
+- created_datetime
+- updated_datetime
+title: Lab Result
+type: object
+uniqueKeys:
+- - id
+- - project_id
+  - submitter_id
+validators: null
