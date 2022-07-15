@@ -13,6 +13,7 @@ links:
   name: programs
   required: true
   target_type: program
+namespace: https://gen3.biocommons.org.au
 program: '*'
 project: '*'
 properties:

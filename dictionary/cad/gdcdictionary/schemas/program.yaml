@@ -6,6 +6,7 @@ description: 'A broad framework of goals to be achieved. (NCIt C52647)
   '
 id: program
 links: []
+namespace: https://gen3.biocommons.org.au
 program: '*'
 project: '*'
 properties:
