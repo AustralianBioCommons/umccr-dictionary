@@ -4,6 +4,7 @@
 # backwards compatibility: dd is a synonym for program, default project to "simulated"
 program ?= $(dd)
 project ?= simulated
+max_samples ?= 10
 
 # read environmental variables from same config file that shared with docker-compose
 ifneq ("$(wildcard .env)","")
