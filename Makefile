@@ -87,7 +87,7 @@ simulate: validate
 	@echo Simulating Data Dictionary: $(program)
 	@mkdir -p data/$(program)/$(project)
 	@rm -f data/$(program)/$(project)/*.*
-	@docker exec -it ddsim data-simulator simulate --url http://ddvis/schema/$(program).json --path /data/$(program)/$(project) --program $(program) --project $(project) --max_samples 10
+	@docker exec -it ddsim data-simulator simulate --url http://ddvis/schema/$(program).json --path /data/$(program)/$(project) --program $(program) --project $(project) --max_samples $(max_samples)
 
 	@test -f data/$(program)/$(project)/DataImportOrder.txt  || { echo "data/$(program)/$(project)/DataImportOrder.txt does not exist" ; exit 1; }
 	@echo "data/$(program)/$(project)/DataImportOrder.txt exists."
