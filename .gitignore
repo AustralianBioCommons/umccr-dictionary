@@ -19,3 +19,5 @@ data/**/*.txt
 output/**/*.tsv
 
 .env
+dictionary/schema_dev/
+schema_dev.json
